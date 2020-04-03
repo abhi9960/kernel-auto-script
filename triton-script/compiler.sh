@@ -2,7 +2,7 @@
 export DEBIAN_FRONTEND=noninteractive
 export TZ=Asia/Kolkata
 export TIME=$(date +"%S-%F")
-export ZIPNAME=MIONEER-${TIME}
+export ZIPNAME=Prince-${TIME}
 ln -fs /usr/share/zoneinfo/Asia/Kolkata /etc/localtime
 dpkg-reconfigure --frontend noninteractive tzdata
 
