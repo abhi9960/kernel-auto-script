@@ -67,7 +67,7 @@ apt-get update -qq && \
 	zlib1g-dev \
 	zstd
 
-git clone -b aosp/EAS-3.18 https://github.com/fadlyas07/android-kernel-xiaomi-msm8917-1 --single-branch triton && cd triton
+git clone https://github.com/fadlyas07/android-kernel-xiaomi-msm8917-1 -b aosp/EAS-3.18 --single-branch triton && cd triton
 git clone https://github.com/Thagoo/android_prebuilts_gcc_linux-x86_aarch64_aarch64-linux-android-4.9 -b lineage-17.0 tc
 git clone https://github.com/Thagoo/AnyKernel3
 echo cloning done
