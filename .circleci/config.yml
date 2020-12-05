@@ -2,7 +2,7 @@ version: 2.1
 jobs:
   build:
     docker:
-      - image: thagoo/triton-script:latest
+      - image: ubuntu:18.04
     environment:
       GIT_EMAIL: 'abhishek111raut@gmail.com'
       GIT_NAME: 'abhi9960'
