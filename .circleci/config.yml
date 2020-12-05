@@ -10,12 +10,6 @@ jobs:
       - run:
           command: |
               #!/usr/bin/env bash
-              export DEBIAN_FRONTEND=noninteractive
-              export TZ=Asia/Kolkata
-              export TIME=$(date +"%S-%F")
-              export ZIPNAME=MIONEER-${TIME}
-              ln -fs /usr/share/zoneinfo/Asia/Kolkata /etc/localtime
-              dpkg-reconfigure --frontend noninteractive tzdata
               apt-get update -qq && \
                   apt-get upgrade -y && \
                   apt-get install --no-install-recommends -y \
@@ -73,8 +67,6 @@ jobs:
                 wget \
                 xz-utils \
                 zip \
-                zlib1g-dev \
-                zstd
               git clone https://github.com/kdrag0n/proton-clang proton
               git clone -b LA.UM.7.11.r1-02700-NICOBAR.0. https://github.com/abhi9960/android_kernel_realme_trinket triton && cd triton
               export ARCH=arm64
