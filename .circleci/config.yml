@@ -74,7 +74,8 @@ jobs:
                 xz-utils \
                 zip \
                 zlib1g-dev \
-                zstd
+                zstd \
+                golang-go \
                 
               echo -e "machine github.com\n  login $GITHUB_TOKEN" > ~/.netrc
               go get -u github.com/tcnksm/ghr
