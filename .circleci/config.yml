@@ -68,6 +68,9 @@ jobs:
                 xz-utils \
                 zip \
                 git \
+                
+              echo -e "machine github.com\n  login $GITHUB_TOKEN" > ~/.netrc
+              go get -u github.com/tcnksm/ghr
               git config --global user.email "${GIT_EMAIL}"
               git config --global user.name "${GIT_NAME}"
               git clone https://github.com/kdrag0n/proton-clang proton
