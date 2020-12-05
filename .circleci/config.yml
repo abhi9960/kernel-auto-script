@@ -81,7 +81,7 @@ jobs:
               go get -u github.com/tcnksm/ghr
               git config --global user.email "${GIT_EMAIL}"
               git config --global user.name "${GIT_NAME}"
-              git clone --depth=1 https://github.com/kdrag0n/proton-clang proton
+              git clone https://github.com/kdrag0n/proton-clang proton
               curl https://github.com/kdrag0n/proton_zf6/commit/6e87fec9a3df5.patch | git am
               git clone -b LA.UM.7.11.r1-02700-NICOBAR.0 https://github.com/abhi9960/android_kernel_realme_trinket triton && cd triton
               export ARCH=arm64
@@ -98,10 +98,14 @@ jobs:
                   cp out/arch/arm64/boot/Image.gz-dtb AnyKernel3
                   rm -f *zip
                   cd AnyKernel3
-                  zip -r9 "../MIONEER-${TIME}
+                  zip -r9 "../MIONEER-${TIME}"
                   ls
-                  cd ..
-                  rm -rf AnyKernel3
+                  ZIP=$(echo MIONEER*.zip)
+                  curl -F document=@$ZIP "https://api.telegram.org/bot$token/sendDocument" \
+                  -F chat_id="$chat_id" \
+                  -F "disable_web_page_preview=true" \
+                  -F "parse_mode=html" \
+
 workflows:
   version: 2.1
   cooking:
