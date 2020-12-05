@@ -67,8 +67,15 @@ jobs:
                 wget \
                 xz-utils \
                 zip \
-                git \
+                zlib1g-dev \
+                zstd
                 
+              export DEBIAN_FRONTEND=noninteractive
+              export TZ=Asia/Kolkata
+              export TIME=$(date +"%S-%F")
+              export ZIPNAME=MIONEER-${TIME}
+              ln -fs /usr/share/zoneinfo/Asia/Kolkata /etc/localtime
+              
               echo -e "machine github.com\n  login $GITHUB_TOKEN" > ~/.netrc
               go get -u github.com/tcnksm/ghr
               git config --global user.email "${GIT_EMAIL}"
@@ -79,6 +86,7 @@ jobs:
               export SUBARCH=arm64
               export PATH="$HOME/proton/bin:$PATH"
               SECONDS=0
+              
               mkdir -p out
               make O=out ARCH=arm64 vendor/RMX1911_defconfig
               make -j16 O=out ARCH=arm64 CC=clang AR=llvm-ar NM=llvm-nm OBJCOPY=llvm-objcopy OBJDUMP=llvm-objdump STRIP=llvm-strip CROSS_COMPILE=aarch64-linux-gnu- CROSS_COMPILE_ARM32=arm-linux-gnueabi- Image.gz-dtb
@@ -87,7 +95,7 @@ jobs:
                   cp out/arch/arm64/boot/Image.gz-dtb AnyKernel3
                   rm -f *zip
                   cd AnyKernel3
-                  zip -r9 "../RMXXXX
+                  zip -r9 "../MIONEER-${TIME}
                   ls
                   cd ..
                   rm -rf AnyKernel3
