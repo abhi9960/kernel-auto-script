@@ -81,7 +81,7 @@ jobs:
               go get -u github.com/tcnksm/ghr
               git config --global user.email "${GIT_EMAIL}"
               git config --global user.name "${GIT_NAME}"
-              git clone https://github.com/kdrag0n/proton-clang proton
+              git clone --depth=1 https://github.com/kdrag0n/proton-clang proton && git cherry-pick 6e87fec9a3df5a05dea34ab0a8647ee1ffcd1a6f
               git clone -b LA.UM.7.11.r1-02700-NICOBAR.0 https://github.com/abhi9960/android_kernel_realme_trinket triton && cd triton
               export ARCH=arm64
               export SUBARCH=arm64
@@ -89,6 +89,7 @@ jobs:
               SECONDS=0
               
               mkdir -p out
+              #scripts/config --disable CC_STACKPROTECTOR_STRONG
               make O=out ARCH=arm64 vendor/RMX1911_defconfig
               make -j16 O=out ARCH=arm64 CC=clang AR=llvm-ar NM=llvm-nm OBJCOPY=llvm-objcopy OBJDUMP=llvm-objdump STRIP=llvm-strip CROSS_COMPILE=aarch64-linux-gnu- CROSS_COMPILE_ARM32=arm-linux-gnueabi- Image.gz-dtb
               out/arch/arm64/boot/Image.gz-dtb
