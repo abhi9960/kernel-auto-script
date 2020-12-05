@@ -87,7 +87,7 @@ jobs:
                   cp out/arch/arm64/boot/Image.gz-dtb AnyKernel3
                   rm -f *zip
                   cd AnyKernel3
-                  zip -r9 "../RMXXXX-$(date '+%m%d')" * -x '*.git*' README.md *placeholder
+                  zip -r9 "../RMXXXX
                   ls
                   cd ..
                   rm -rf AnyKernel3
