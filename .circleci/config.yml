@@ -82,7 +82,7 @@ jobs:
               git config --global user.email "${GIT_EMAIL}"
               git config --global user.name "${GIT_NAME}"
               git clone https://github.com/kdrag0n/proton-clang proton
-              git clone -b LA.UM.7.11.r1-02700-NICOBAR.0. https://github.com/abhi9960/android_kernel_realme_trinket triton && cd triton
+              git clone -b LA.UM.7.11.r1-02700-NICOBAR.0 https://github.com/abhi9960/android_kernel_realme_trinket triton && cd triton
               export ARCH=arm64
               export SUBARCH=arm64
               export PATH="$HOME/proton/bin:$PATH"
