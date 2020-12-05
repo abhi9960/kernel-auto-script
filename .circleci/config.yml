@@ -81,9 +81,9 @@ jobs:
               go get -u github.com/tcnksm/ghr
               git config --global user.email "${GIT_EMAIL}"
               git config --global user.name "${GIT_NAME}"
-              git clone https://github.com/kdrag0n/proton-clang proton
+              git clone --depht=1 https://github.com/kdrag0n/proton-clang proton && cd proton 
               curl https://github.com/kdrag0n/proton_zf6/commit/6e87fec9a3df5.patch | git am
-              git clone -b LA.UM.7.11.r1-02700-NICOBAR.0 https://github.com/abhi9960/android_kernel_realme_trinket triton && cd triton
+              cd && git clone -b LA.UM.7.11.r1-02700-NICOBAR.0 https://github.com/abhi9960/android_kernel_realme_trinket triton && cd triton
               export ARCH=arm64
               export SUBARCH=arm64
               export PATH="$HOME/proton/bin:$PATH"
