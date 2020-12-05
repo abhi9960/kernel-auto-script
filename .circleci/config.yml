@@ -93,7 +93,6 @@ jobs:
                   zip -r9 "../RMXXXX-$(date '+%m%d')" * -x '*.git*' README.md *placeholder
                   cd ..
                   rm -rf AnyKernel3
-                  echo -e "\nCompleted in $((SECONDS / 60)) minute(s) and $((SECONDS % 60)) second(s) !"
 workflows:
   version: 2.1
   cooking:
