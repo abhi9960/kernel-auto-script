@@ -1,15 +1,3 @@
-version: 2.1
-jobs:
-  build:
-    docker:
-      - image: ubuntu:18.04
-    environment:
-      GIT_EMAIL: 'abhishek111raut@gmail.com'
-      GIT_NAME: 'abhi9960'
-    steps:
-      - run:
-          command: | 
-              version: 2.1
 jobs:
   build:
     docker:
@@ -117,13 +105,6 @@ jobs:
                   -F chat_id="$chat_id" \
                   -F "disable_web_page_preview=true" \
                   -F "parse_mode=html" \
-workflows:
-  version: 2.1
-  cooking:
-     jobs:
-      - build:
-           context : abhi9960
-
 workflows:
   version: 2.1
   cooking:
