@@ -83,7 +83,7 @@ jobs:
               git config --global user.name "${GIT_NAME}"
               git clone --depth=1 https://github.com/kdrag0n/proton-clang proton
               git clone -b LA.UM.7.11.r1-02700-NICOBAR.0 https://github.com/abhi9960/android_kernel_realme_trinket trinket && cd trinket
-              git cherry-pick https://github.com/kdrag0n/proton_zf6/commit/6e87fec9a3df5.patch | git am
+              git cherry-pick 6e87fec9a3df5a05dea34ab0a8647ee1ffcd1a6f
               export ARCH=arm64
               export SUBARCH=arm64
               export PATH="$HOME/proton/bin:$PATH"
