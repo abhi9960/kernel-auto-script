@@ -1,13 +1,102 @@
-# Use the latest 2.1 version of CircleCI pipeline process engine. See: https://circleci.com/docs/2.0/configuration-reference
 version: 2.1
-# Use a package of configuration called an orb.
-orbs:
-  # Declare a dependency on the welcome-orb
-  welcome: circleci/welcome-orb@0.4.1
-# Orchestrate or schedule a set of jobs
+jobs:
+  build:
+    docker:
+      - image: thagoo/triton-script:latest
+    environment:
+      GIT_EMAIL: 'abhishek111raut@gmail.com'
+      GIT_NAME: 'abhi9960'
+    steps:
+      - run:
+          command: |
+              #!/usr/bin/env bash
+              export DEBIAN_FRONTEND=noninteractive
+              export TZ=Asia/Kolkata
+              export TIME=$(date +"%S-%F")
+              export ZIPNAME=MIONEER-${TIME}
+              ln -fs /usr/share/zoneinfo/Asia/Kolkata /etc/localtime
+              dpkg-reconfigure --frontend noninteractive tzdata
+              apt-get update -qq && \
+                  apt-get upgrade -y && \
+                  apt-get install --no-install-recommends -y \
+                autoconf \
+                autogen \
+                automake \
+                autotools-dev \
+                bc \
+                binutils \
+                binutils-aarch64-linux-gnu \
+                binutils-arm-linux-gnueabi \
+                bison \
+                bzip2 \
+                ca-certificates \
+                coreutils \
+                cmake \
+                curl \
+                expect \
+                flex \
+                g++ \
+                gawk \
+                gcc \
+                git \
+                gnupg \
+                gperf \
+                help2man \
+                lftp \
+                libc6-dev \
+                libelf-dev \
+                libgomp1-* \
+                liblz4-tool \
+                libncurses5-dev \
+                libssl-dev \
+                libstdc++6 \
+                libtool \
+                libtool-bin \
+                m4 \
+                make \
+                nano \
+                openjdk-8-jdk \
+                openssh-client \
+                openssl \
+                ovmf \
+                patch \
+                pigz \
+                python3 \
+                python \
+                rsync \
+                shtool \
+                subversion \
+                tar \
+                texinfo \
+                tzdata \
+                u-boot-tools \
+                unzip \
+                wget \
+                xz-utils \
+                zip \
+                zlib1g-dev \
+                zstd
+              git clone https://github.com/kdrag0n/proton-clang proton
+              git clone -b LA.UM.7.11.r1-02700-NICOBAR.0. https://github.com/abhi9960/android_kernel_realme_trinket triton && cd triton
+              export ARCH=arm64
+              export SUBARCH=arm64
+              export PATH="$HOME/proton/bin:$PATH"
+              SECONDS=0
+              mkdir -p out
+              make O=out ARCH=arm64 vendor/RMX1911_defconfig
+              make -j16 O=out ARCH=arm64 CC=clang AR=llvm-ar NM=llvm-nm OBJCOPY=llvm-objcopy OBJDUMP=llvm-objdump STRIP=llvm-strip CROSS_COMPILE=aarch64-linux-gnu- CROSS_COMPILE_ARM32=arm-linux-gnueabi- Image.gz-dtb
+              out/arch/arm64/boot/Image.gz-dtb
+                  git clone -q https://github.com/hpnightowl/AnyKernel3.git
+                  cp out/arch/arm64/boot/Image.gz-dtb AnyKernel3
+                  rm -f *zip
+                  cd AnyKernel3
+                  zip -r9 "../RMXXXX-$(date '+%m%d')" * -x '*.git*' README.md *placeholder
+                  cd ..
+                  rm -rf AnyKernel3
+                  echo -e "\nCompleted in $((SECONDS / 60)) minute(s) and $((SECONDS % 60)) second(s) !"
 workflows:
-  # Name the workflow "welcome"
-  welcome:
-    # Run the welcome/run job in its own container
-    jobs:
-      - welcome/run
+  version: 2.1
+  cooking:
+     jobs:
+      - build:
+           context : abhi9960
